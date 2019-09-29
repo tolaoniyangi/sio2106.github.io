@@ -176,6 +176,37 @@
 
 					//TODO: Update all labels
 					//
+					var labels = svg.selectAll("text")
+						.data(dataset, key);	
+
+					labels.enter()
+						.append("text")
+						.attr("text-anchor", "middle")
+						.text(function(d) {
+							return d.value;
+						})
+						.attr("font-family", "sans-serif")
+						.attr("font-size", "11px")
+						.attr("fill", "white")
+						.attr("x", w)
+						.attr("y", function(d) {
+							return h - yScale(d.value) + 14;
+						})
+						.merge(labels)
+						.transition()
+					    .duration(500)
+						.attr("x", function(d, i) {
+							return xScale(i) + xScale.bandwidth() / 2;
+						});
+
+					
+					labels.exit()
+						.transition()
+						.duration(500)
+						.attr("x", -xScale.bandwidth())  // <-- Exit stage left
+						.remove();
+
+
 					//Exercise: Modify this code to add and remove the correct labels each time!
 					//
 					svg.selectAll("text")

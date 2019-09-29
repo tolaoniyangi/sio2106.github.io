@@ -139,19 +139,30 @@
 					//
 					//Exercise: Modify this code to remove the correct label each time!
 					//
-					svg.selectAll("text")
-					   .data(dataset)
-					   .transition()
-					   .duration(500)
-					   .text(function(d) {
+
+					var labels = svg.selectAll("text")
+					   .data(dataset);
+
+					labels.enter()
+						.append("text")
+					    .merge(labels)
+					    .transition()
+					    .duration(500)
+					    .text(function(d) {
 					   		return d;
-					   })
-					   .attr("x", function(d, i) {
+					    })
+					    .attr("x", function(d, i) {
 							return xScale(i) + xScale.bandwidth() / 2;
-					   })
-					   .attr("y", function(d) {
-							return h - yScale(d) + 14;
-					   });
+					    })
+					    .attr("y", function(d) {
+					 		return h - yScale(d) + 14;
+					    });
+					
+					labels.exit()
+						.transition()
+						.duration(500)
+						.attr("x",w)
+						.remove();
 
 				});
 

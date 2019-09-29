@@ -160,20 +160,31 @@
 					//
 					//Exercise: Modify this code to remove the correct label each time!
 					//
-					svg.selectAll("text")
-					   .data(dataset, key)		//Bind data with custom key function
-					   .transition()
-					   .duration(500)
-					   .text(function(d) {
-					   		return d.value;
-					   })
-					   .attr("x", function(d, i) {
-							return xScale(i) + xScale.bandwidth() / 2;
-					   })
-					   .attr("y", function(d) {
-							return h - yScale(d.value) + 14;
-					   });
+					var labels = svg.selectAll("text")
+						.data(dataset, key);	
 
+					labels.enter()
+						.append("text")
+						.merge(labels) //NEVER FORGET THIS
+						.transition()
+					    .duration(500)
+						.text(function(d) {
+							return d.value;
+						})
+						.attr("x", function(d, i) {
+							return xScale(i) + xScale.bandwidth() / 2;
+						})
+						.attr("y", function(d) {
+							return h - yScale(d.value) + 14;
+						})
+
+					
+					labels.exit()
+						.transition()
+						.duration(500)
+						.attr("x", -xScale.bandwidth())  // <-- Exit stage left
+						.remove();
+						
 				});
 
 			
