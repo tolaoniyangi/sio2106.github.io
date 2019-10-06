@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>ParseFloatError?</title>
+		<script type="text/javascript" src="../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			
+			var rowConverter = function(d) {
+				return {
+					Food: d.Food,
+					Deliciousness: parseFloat(d.Deliciousness)
+				};
+			}
+			
+			d3.csv("food.csv", rowConverter, function(data) {
+				console.log(data);
+			});
+		</script>
+	</body>
+</html>

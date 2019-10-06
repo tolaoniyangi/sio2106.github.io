@@ -11,39 +11,35 @@
             d3.select("body")
                 .append("p")
                 .text("New paragraph!");
-            
-            // d3.csv("food.csv", function(data){
-            //     console.log(data)
-            // });
 
-            // var rowConverter = function(d) {
-            //     return {
-            //         Food: d.Food,
-            //         Deliciousness: parseFloat(d.Deliciousness)
-            //     };
-            // }
+            var rowConverter = function(d) {
+                return {
+                    Food: d.Food,
+                    Deliciousness: parseFloat(d.Deliciousness)
+                };
+            }
 
-            // d3.csv("food.csv", rowConverter, function(data){
-            //     console.log(data)
-            // });
-
-            var dataset;
-
-            d3.csv("food.csv", function(error, data){
-                if(error){
-                    console.log(error);
-                } else{
-                    console.log(data);
-
-                    dataset = data;
-                    generateVis();
-                    hideLoadingMsg();
-                }
+            d3.csv("food.csv", rowConverter, function(data){
+                console.log(data)
             });
-            
-            var useTheDataLater = function(){
 
-            };
+            // var dataset;
+
+            // d3.csv("food.csv", function(error, data){
+            //     if(error){
+            //         console.log(error);
+            //     } else{
+            //         console.log(data);
+
+            //         dataset = data;
+            //         generateVis();
+            //         hideLoadingMsg();
+            //     }
+            // });
+            
+            // var useTheDataLater = function(){
+
+            // };
 
         </script>
     </body>
